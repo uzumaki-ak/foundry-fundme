@@ -14,4 +14,10 @@ contract FundmeTest is Test {
     function testMinimumFiveUsd() public {
         assertEq(fundMe.MINIMUM_USD(), 5 * 10 ** 18);
     }
+    function testOwnerIsMessageSender()public {
+        // console.log(fundMe.i_owner());
+        // console.log(msg.sender);
+        // assertEq(fundMe.i_owner(), msg.sender);
+        assertEq(fundMe.i_owner(),address(this));
+    }
 }
