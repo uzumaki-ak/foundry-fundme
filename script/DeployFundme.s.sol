@@ -9,9 +9,7 @@ contract DeployFundme is Script {
     function run() external returns (FundMe) {
         //anything before vm.startBroadcast() is run on the local chain, and anything after is run on the testnet or mainnet, so we can use this to deploy our contract to the appropriate network based on the chain ID.
         HelperConfig helperConfig = new HelperConfig();
-        HelperConfig.NetworkConfig memory config = helperConfig
-            .activeNetworkConfig;
-        address ethUsdPriceFeed = config.priceFeed;
+        address ethUsdPriceFeed = helperConfig.activeNetworkConfig();
 
         vm.startBroadcast();
         FundMe fundMe = new FundMe(ethUsdPriceFeed);
@@ -19,3 +17,4 @@ contract DeployFundme is Script {
         return fundMe;
     }
 }
+
